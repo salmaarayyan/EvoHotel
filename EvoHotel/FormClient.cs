@@ -312,32 +312,33 @@ namespace EvoHotel
             {
                 try
                 {
+                    StringBuilder statistik = new StringBuilder();
+                    conn.InfoMessage += (s, args) =>
+                    {
+                        statistik.AppendLine(args.Message);
+                    };
+
                     conn.Open();
 
-                    // Mengaktifkan analisis statistik untuk I/O dan waktu eksekusi
+                    // Aktifkan statistik
                     SqlCommand cmd = new SqlCommand("SET STATISTICS IO ON; SET STATISTICS TIME ON;", conn);
-                    cmd.ExecuteNonQuery();  // Menjalankan perintah untuk mengaktifkan statistik
+                    cmd.ExecuteNonQuery();
 
-                    // Menjalankan query untuk memuat data klien
-                    string query = @"SELECT KlienID, NamaKlien, Email, NoTelp, Alamat
-                             FROM Klien";  // Query tanpa filter tambahan
+                    // Jalankan query yang ingin dianalisis
+                    string query = @"SELECT KlienID, NamaKlien, Email, NoTelp, Alamat FROM Klien";
                     SqlCommand dataCmd = new SqlCommand(query, conn);
-
                     SqlDataReader reader = dataCmd.ExecuteReader();
                     DataTable dtKlien = new DataTable();
-                    dtKlien.Load(reader);  // Mengisi DataTable dengan hasil query
-
-                    // Mengikat DataTable ke BindingSource
+                    dtKlien.Load(reader);
                     bindingSource.DataSource = dtKlien;
-
-                    // Menyegarkan DataGridView
                     dgvFormKlien.DataSource = bindingSource;
-
                     reader.Close();
 
-                    // Menampilkan hasil analisis
-                    MessageBox.Show("Analisis query selesai. Periksa Output SQL Server untuk statistik I/O dan waktu eksekusi.",
-                                    "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Tampilkan hasil statistik
+                    if (statistik.Length > 0)
+                        MessageBox.Show(statistik.ToString(), "STATISTICS INFO");
+                    else
+                        MessageBox.Show("Tidak ada statistik yang diterima.", "STATISTICS INFO");
                 }
                 catch (Exception ex)
                 {

@@ -260,30 +260,32 @@ namespace EvoHotel
             {
                 try
                 {
+                    StringBuilder statistik = new StringBuilder();
+                    conn.InfoMessage += (s, args) =>
+                    {
+                        statistik.AppendLine(args.Message);
+                    };
+
                     conn.Open();
 
-                    // Mengaktifkan analisis statistik untuk I/O dan waktu eksekusi
+                    // Aktifkan statistik
                     SqlCommand cmd = new SqlCommand("SET STATISTICS IO ON; SET STATISTICS TIME ON;", conn);
-                    cmd.ExecuteNonQuery();  // Menjalankan perintah untuk mengaktifkan statistik
+                    cmd.ExecuteNonQuery();
 
-                    // Menjalankan query untuk memuat data ruangan
-                    string query = @"SELECT RuanganID, NamaRuangan, Kapasitas, HargaPerJam, Fasilitas, Status 
-                             FROM Ruangan 
-                             WHERE Status = @Status";
+                    // Jalankan query yang ingin dianalisis (bisa tanpa filter, atau sesuai kebutuhan)
+                    string query = @"SELECT RuanganID, NamaRuangan, Kapasitas, HargaPerJam, Fasilitas, Status FROM Ruangan";
                     SqlCommand dataCmd = new SqlCommand(query, conn);
-                    dataCmd.Parameters.AddWithValue("@Status", "Tersedia");
-
                     SqlDataReader reader = dataCmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        // Proses data yang dibaca jika diperlukan (misalnya menampilkan di DataGridView)
-                    }
-
+                    DataTable dtRoom = new DataTable();
+                    dtRoom.Load(reader);
+                    dgvFormRoom.DataSource = dtRoom;
                     reader.Close();
 
-                    // Menampilkan hasil analisis
-                    MessageBox.Show("Analisis query selesai. Periksa Output SQL Server untuk statistik I/O dan waktu eksekusi.",
-                                    "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Tampilkan hasil statistik
+                    if (statistik.Length > 0)
+                        MessageBox.Show(statistik.ToString(), "STATISTICS INFO");
+                    else
+                        MessageBox.Show("Tidak ada statistik yang diterima.", "STATISTICS INFO");
                 }
                 catch (Exception ex)
                 {
