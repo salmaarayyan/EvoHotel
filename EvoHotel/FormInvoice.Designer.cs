@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInvoice));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,6 +49,11 @@
             this.dgvDataPembayaran = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblBuktiPembayaran = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Back)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataPembayaran)).BeginInit();
             this.SuspendLayout();
@@ -215,20 +220,20 @@
             // 
             // dgvDataPembayaran
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDataPembayaran.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDataPembayaran.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDataPembayaran.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDataPembayaran.Location = new System.Drawing.Point(88, 394);
+            this.dgvDataPembayaran.Location = new System.Drawing.Point(88, 497);
             this.dgvDataPembayaran.Name = "dgvDataPembayaran";
             this.dgvDataPembayaran.RowHeadersWidth = 82;
             this.dgvDataPembayaran.RowTemplate.Height = 33;
-            this.dgvDataPembayaran.Size = new System.Drawing.Size(1060, 347);
+            this.dgvDataPembayaran.Size = new System.Drawing.Size(1060, 244);
             this.dgvDataPembayaran.TabIndex = 23;
             this.dgvDataPembayaran.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataPembayaran_CellContentClick);
             // 
@@ -252,12 +257,63 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.Report_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(83, 397);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(331, 25);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Lampiran Foto Bukti Pembayaran";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(88, 436);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(135, 46);
+            this.button8.TabIndex = 28;
+            this.button8.Text = "Browse...";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.btnBrowseBukti_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(403, 497);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 25);
+            this.label6.TabIndex = 29;
+            // 
+            // lblBuktiPembayaran
+            // 
+            this.lblBuktiPembayaran.AutoSize = true;
+            this.lblBuktiPembayaran.Location = new System.Drawing.Point(229, 447);
+            this.lblBuktiPembayaran.Name = "lblBuktiPembayaran";
+            this.lblBuktiPembayaran.Size = new System.Drawing.Size(166, 25);
+            this.lblBuktiPembayaran.TabIndex = 30;
+            this.lblBuktiPembayaran.Text = "No file selected.";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(749, 398);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(300, 48);
+            this.button7.TabIndex = 31;
+            this.button7.Text = "Lihat Bukti Pembayaran";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.btnLihatBukti_Click);
+            // 
             // FormInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1178, 836);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.lblBuktiPembayaran);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.dgvDataPembayaran);
@@ -308,5 +364,10 @@
         private System.Windows.Forms.DataGridView dgvDataPembayaran;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblBuktiPembayaran;
+        private System.Windows.Forms.Button button7;
     }
 }

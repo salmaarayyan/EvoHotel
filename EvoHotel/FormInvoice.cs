@@ -16,6 +16,8 @@ namespace EvoHotel
     public partial class FormInvoice : Form
     {
         private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        private byte[] buktiPembayaranBytes = null;
+        private string buktiPembayaranFileName = "";
         public FormInvoice()
         {
             InitializeComponent();
@@ -51,6 +53,9 @@ namespace EvoHotel
             txtTotal.Clear();
             comboBoxMetodePembayaran.SelectedIndex = -1;
             comboBoxStatus.SelectedIndex = -1;
+            buktiPembayaranBytes = null;
+            buktiPembayaranFileName = "";
+            lblBuktiPembayaran.Text = "No file selected.";
         }
 
         private void LoadData()
@@ -139,95 +144,85 @@ namespace EvoHotel
                 return;
             }
 
-            // ✅ Ambil nilai dari input form
             string statusPembayaran = comboBoxStatus.SelectedItem?.ToString();
             string metodePembayaran = comboBoxMetodePembayaran.SelectedItem?.ToString();
 
-            // ✅ Validasi: pastikan semua data penting diisi
             if (string.IsNullOrWhiteSpace(txtTotal.Text) || comboBoxStatus.SelectedItem == null)
             {
                 MessageBox.Show("Harap isi semua data!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // ✅ Validasi: jika status 'Diterima', metode harus diisi
             if (statusPembayaran == "Diterima" && string.IsNullOrEmpty(metodePembayaran))
             {
                 MessageBox.Show("Silakan pilih metode pembayaran jika status adalah 'Diterima'.", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-
-            if (statusPembayaran == "Menunggu Konfirmasi" && !string.IsNullOrEmpty(metodePembayaran))
-            {
-                MessageBox.Show("Metode pembayaran tidak boleh diisi jika status 'Menunggu Konfirmasi'.", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // ✅ Validasi: cek total harus berupa angka desimal
             if (!decimal.TryParse(txtTotal.Text.Trim(), out decimal total))
             {
                 MessageBox.Show("Total harus berupa angka!", "Input Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // ✅ Ambil ID dari baris yang dipilih di DataGridView
             int dataPembayaranID = Convert.ToInt32(dgvDataPembayaran.CurrentRow.Cells["DataPembayaranID"].Value);
 
-            // ✅ Koneksi ke database dan mulai transaksi
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction(); // <-- Mulai transaksi
+                SqlTransaction transaction = conn.BeginTransaction();
 
                 try
                 {
-                    // 🔄 LANGKAH 1: Update kolom Total dan MetodePembayaran
-                    string updateQuery = @"UPDATE DataPembayaran
-                                   SET Total = @Total,
-                                       MetodePembayaran = @MetodePembayaran
-                                   WHERE DataPembayaranID = @DataPembayaranID";
+                    // Jika user memilih file baru, update BuktiPembayaran, jika tidak, jangan update kolom tsb
+                    string updateQuery = buktiPembayaranBytes != null
+                        ? @"UPDATE DataPembayaran
+                    SET Total = @Total,
+                        MetodePembayaran = @MetodePembayaran,
+                        BuktiPembayaran = @BuktiPembayaran
+                    WHERE DataPembayaranID = @DataPembayaranID"
+                        : @"UPDATE DataPembayaran
+                    SET Total = @Total,
+                        MetodePembayaran = @MetodePembayaran
+                    WHERE DataPembayaranID = @DataPembayaranID";
 
                     using (SqlCommand cmd = new SqlCommand(updateQuery, conn, transaction))
                     {
                         cmd.Parameters.AddWithValue("@Total", total);
                         cmd.Parameters.AddWithValue("@MetodePembayaran", (object)metodePembayaran ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@DataPembayaranID", dataPembayaranID);
+                        if (buktiPembayaranBytes != null)
+                            cmd.Parameters.AddWithValue("@BuktiPembayaran", buktiPembayaranBytes);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected == 0)
                         {
-                            transaction.Rollback(); // ⛔ Batalkan transaksi jika gagal
+                            transaction.Rollback();
                             MessageBox.Show("Data pembayaran gagal diperbarui!", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
 
-                    // 🔄 LANGKAH 2: Panggil Stored Procedure untuk update kolom Status
+                    // Update status via SP jika perlu
                     using (SqlCommand spCmd = new SqlCommand("spUpdateStatusPembayaran", conn, transaction))
                     {
                         spCmd.CommandType = CommandType.StoredProcedure;
                         spCmd.Parameters.AddWithValue("@DataPembayaranID", dataPembayaranID);
                         spCmd.Parameters.AddWithValue("@StatusBaru", statusPembayaran);
-                        spCmd.ExecuteNonQuery(); // <-- Jalankan SP
+                        spCmd.ExecuteNonQuery();
                     }
 
-                    // ✅ Jika semua berhasil, simpan perubahan
                     transaction.Commit();
                     MessageBox.Show("Data pembayaran berhasil diperbarui!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // 🔃 Refresh tabel dan kosongkan input
                     LoadData();
                     ClearForm();
                 }
                 catch (Exception ex)
                 {
-                    // ⛔ Jika ada error, batalkan semua perubahan
                     transaction.Rollback();
                     MessageBox.Show("Error: " + ex.Message, "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
 
 
@@ -293,17 +288,21 @@ namespace EvoHotel
             string statusPembayaran = comboBoxStatus.SelectedItem?.ToString();
             string metodePembayaran = comboBoxMetodePembayaran.SelectedItem?.ToString();
 
-            if (string.IsNullOrWhiteSpace(txtTotal.Text) ||
-                comboBoxStatus.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(txtTotal.Text) || comboBoxStatus.SelectedItem == null)
             {
                 MessageBox.Show("Harap isi semua data!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Validasi status vs metode pembayaran
             if (statusPembayaran == "Diterima" && string.IsNullOrEmpty(metodePembayaran))
             {
                 MessageBox.Show("Silakan pilih metode pembayaran jika status pembayaran adalah 'Diterima'.", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (statusPembayaran == "Diterima" && (buktiPembayaranBytes == null || buktiPembayaranBytes.Length == 0))
+            {
+                MessageBox.Show("Silakan upload bukti pembayaran!", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -324,8 +323,8 @@ namespace EvoHotel
                 try
                 {
                     conn.Open();
-                    string query = "INSERT INTO DataPembayaran (Total, MetodePembayaran, Status, PemesananID, KlienID) " +
-                                   "VALUES (@Total, @MetodePembayaran, @Status, @PemesananID, @KlienID)";
+                    string query = "INSERT INTO DataPembayaran (Total, MetodePembayaran, Status, PemesananID, KlienID, BuktiPembayaran) " +
+                                   "VALUES (@Total, @MetodePembayaran, @Status, @PemesananID, @KlienID, @BuktiPembayaran)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -334,6 +333,7 @@ namespace EvoHotel
                         cmd.Parameters.AddWithValue("@PemesananID", comboBoxPemesanan.SelectedValue);
                         cmd.Parameters.AddWithValue("@KlienID", comboBoxKlien.SelectedValue);
                         cmd.Parameters.AddWithValue("@Status", statusPembayaran);
+                        cmd.Parameters.AddWithValue("@BuktiPembayaran", (object)buktiPembayaranBytes ?? DBNull.Value);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
@@ -492,8 +492,6 @@ namespace EvoHotel
             }
         }
 
-
-
         private void btnBack_Click(object sender, EventArgs e)
         {
             FormDashboard formMenu = new FormDashboard();
@@ -503,15 +501,20 @@ namespace EvoHotel
 
         private void BtnAnalisis_Click(object sender, EventArgs e)
         {
-            // Tambahkan ini di paling awal:
             SetupQueryOptimization();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
+                    StringBuilder statistik = new StringBuilder();
+                    conn.InfoMessage += (s, args) =>
+                    {
+                        statistik.AppendLine(args.Message);
+                    };
+
                     conn.Open();
 
-                    // Aktifkan analisis statistik IO dan waktu eksekusi (efeknya hanya terlihat di SSMS jika dijalankan manual)
+                    // Aktifkan statistik
                     SqlCommand statCmd = new SqlCommand("SET STATISTICS IO ON; SET STATISTICS TIME ON;", conn);
                     statCmd.ExecuteNonQuery();
 
@@ -531,13 +534,16 @@ namespace EvoHotel
                     {
                         while (reader.Read())
                         {
-                            // Data bisa diproses jika ingin, tapi di sini kita hanya menganalisis performa
+                            // Data bisa diproses jika ingin, tapi di sini hanya analisis performa
                         }
                         reader.Close();
                     }
 
-                    MessageBox.Show("Analisis query selesai.\nSilakan cek tab 'Messages' di SQL Server Management Studio (SSMS) untuk statistik I/O dan waktu.",
-                                    "Analisis Selesai", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Tampilkan hasil statistik
+                    if (statistik.Length > 0)
+                        MessageBox.Show(statistik.ToString(), "STATISTICS INFO");
+                    else
+                        MessageBox.Show("Tidak ada statistik yang diterima.", "STATISTICS INFO");
                 }
                 catch (Exception ex)
                 {
@@ -579,6 +585,54 @@ namespace EvoHotel
                 using (SqlCommand cmd2 = new SqlCommand(indexStatus, conn))
                 {
                     cmd2.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void btnBrowseBukti_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Pilih Bukti Pembayaran";
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.pdf|All Files|*.*";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    buktiPembayaranBytes = File.ReadAllBytes(ofd.FileName);
+                    buktiPembayaranFileName = Path.GetFileName(ofd.FileName);
+                    lblBuktiPembayaran.Text = buktiPembayaranFileName;
+                }
+            }
+        }
+
+        private void btnLihatBukti_Click(object sender, EventArgs e)
+        {
+            if (dgvDataPembayaran.CurrentRow == null)
+            {
+                MessageBox.Show("Pilih data pembayaran terlebih dahulu!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int dataPembayaranID = Convert.ToInt32(dgvDataPembayaran.CurrentRow.Cells["DataPembayaranID"].Value);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT BuktiPembayaran FROM DataPembayaran WHERE DataPembayaranID = @ID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", dataPembayaranID);
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value && result != null)
+                    {
+                        byte[] fileBytes = (byte[])result;
+                        string tempPath = Path.Combine(Path.GetTempPath(), $"BuktiPembayaran_{dataPembayaranID}.jpg");
+                        File.WriteAllBytes(tempPath, fileBytes);
+                        System.Diagnostics.Process.Start(tempPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bukti pembayaran belum diupload.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }
