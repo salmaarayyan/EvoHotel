@@ -29,215 +29,282 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDashboard));
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.Client = new System.Windows.Forms.PictureBox();
-            this.Event = new System.Windows.Forms.PictureBox();
-            this.Room = new System.Windows.Forms.PictureBox();
-            this.Order = new System.Windows.Forms.PictureBox();
-            this.Invoice = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelDashboard = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Client)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Room)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Order)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Invoice)).BeginInit();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panelDashboard.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(206, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(746, 60);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "SISTEM MANAJEMEN EVENT";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.SaddleBrown;
             this.label2.Font = new System.Drawing.Font("Goudy Stout", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(333, 88);
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(696, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(480, 59);
             this.label2.TabIndex = 1;
             this.label2.Text = "EVO HOTEL";
             // 
-            // Client
+            // label1
             // 
-            this.Client.Image = ((System.Drawing.Image)(resources.GetObject("Client.Image")));
-            this.Client.Location = new System.Drawing.Point(107, 226);
-            this.Client.Name = "Client";
-            this.Client.Size = new System.Drawing.Size(238, 169);
-            this.Client.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Client.TabIndex = 2;
-            this.Client.TabStop = false;
-            this.Client.Click += new System.EventHandler(this.Client_Click);
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.SaddleBrown;
+            this.label1.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(557, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(746, 60);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "SISTEM MANAJEMEN EVENT";
             // 
-            // Event
+            // panelDashboard
             // 
-            this.Event.Image = ((System.Drawing.Image)(resources.GetObject("Event.Image")));
-            this.Event.Location = new System.Drawing.Point(802, 226);
-            this.Event.Name = "Event";
-            this.Event.Size = new System.Drawing.Size(249, 169);
-            this.Event.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Event.TabIndex = 3;
-            this.Event.TabStop = false;
-            this.Event.Click += new System.EventHandler(this.Event_Click);
+            this.panelDashboard.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelDashboard.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panelDashboard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelDashboard.BackgroundImage")));
+            this.panelDashboard.Controls.Add(this.panel1);
+            this.panelDashboard.Controls.Add(this.label1);
+            this.panelDashboard.Controls.Add(this.label2);
+            this.panelDashboard.Location = new System.Drawing.Point(2, 1);
+            this.panelDashboard.Name = "panelDashboard";
+            this.panelDashboard.Size = new System.Drawing.Size(1447, 884);
+            this.panelDashboard.TabIndex = 13;
             // 
-            // Room
+            // panel1
             // 
-            this.Room.Image = ((System.Drawing.Image)(resources.GetObject("Room.Image")));
-            this.Room.Location = new System.Drawing.Point(448, 226);
-            this.Room.Name = "Room";
-            this.Room.Size = new System.Drawing.Size(263, 169);
-            this.Room.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Room.TabIndex = 4;
-            this.Room.TabStop = false;
-            this.Room.Click += new System.EventHandler(this.Room_Click);
+            this.panel1.BackColor = System.Drawing.Color.Linen;
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.pictureBox5);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.pictureBox4);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.pictureBox3);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.pictureBox2);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(416, 894);
+            this.panel1.TabIndex = 13;
             // 
-            // Order
+            // panel2
             // 
-            this.Order.Image = ((System.Drawing.Image)(resources.GetObject("Order.Image")));
-            this.Order.Location = new System.Drawing.Point(245, 497);
-            this.Order.Name = "Order";
-            this.Order.Size = new System.Drawing.Size(299, 169);
-            this.Order.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Order.TabIndex = 5;
-            this.Order.TabStop = false;
-            this.Order.Click += new System.EventHandler(this.Order_Click);
-            // 
-            // Invoice
-            // 
-            this.Invoice.Image = ((System.Drawing.Image)(resources.GetObject("Invoice.Image")));
-            this.Invoice.Location = new System.Drawing.Point(632, 497);
-            this.Invoice.Name = "Invoice";
-            this.Invoice.Size = new System.Drawing.Size(239, 169);
-            this.Invoice.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Invoice.TabIndex = 6;
-            this.Invoice.TabStop = false;
-            this.Invoice.Click += new System.EventHandler(this.Invoice_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Cooper Black", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label3.Location = new System.Drawing.Point(100, 398);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(245, 42);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Kelola Klien";
+            this.panel2.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Location = new System.Drawing.Point(-6, -2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(422, 126);
+            this.panel2.TabIndex = 19;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Cooper Black", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label4.Location = new System.Drawing.Point(795, 398);
+            this.label4.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(25, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(256, 42);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Kelola Event";
+            this.label4.Size = new System.Drawing.Size(374, 60);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "DASHBOARD";
             // 
-            // label5
+            // label13
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label5.Location = new System.Drawing.Point(442, 403);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(269, 36);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Kelola Ruangan";
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label13.Location = new System.Drawing.Point(102, 586);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(204, 33);
+            this.label13.TabIndex = 18;
+            this.label13.Text = "Pembayaran";
+            this.label13.Click += new System.EventHandler(this.Invoice_Click);
             // 
-            // label6
+            // label14
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label6.Location = new System.Drawing.Point(239, 681);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(305, 36);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Kelola Pemesanan";
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label14.Location = new System.Drawing.Point(102, 555);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(186, 33);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "Kelola Data";
+            this.label14.Click += new System.EventHandler(this.Invoice_Click);
             // 
-            // label7
+            // pictureBox5
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label7.Location = new System.Drawing.Point(650, 681);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(202, 36);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Kelola Data";
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(14, 557);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(82, 65);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 16;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.Invoice_Click);
             // 
-            // label8
+            // label12
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label8.Location = new System.Drawing.Point(644, 717);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(217, 36);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Pembayaran";
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label12.Location = new System.Drawing.Point(102, 478);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(287, 33);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "Kelola Pemesanan";
+            this.label12.Click += new System.EventHandler(this.Order_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(14, 464);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(82, 58);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 14;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.Order_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label11.Location = new System.Drawing.Point(102, 389);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(207, 33);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Kelola Acara";
+            this.label11.Click += new System.EventHandler(this.Event_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(14, 367);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(82, 68);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 12;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.Event_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label9.Location = new System.Drawing.Point(102, 194);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(196, 33);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Kelola Klien";
+            this.label9.Click += new System.EventHandler(this.Client_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(14, 269);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(82, 66);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 10;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.Room_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label10.Location = new System.Drawing.Point(102, 284);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(248, 33);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Kelola Ruangan";
+            this.label10.Click += new System.EventHandler(this.Room_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(14, 166);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(82, 76);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.Client_Click);
             // 
             // FormDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1161, 826);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.Invoice);
-            this.Controls.Add(this.Order);
-            this.Controls.Add(this.Room);
-            this.Controls.Add(this.Event);
-            this.Controls.Add(this.Client);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1450, 888);
+            this.Controls.Add(this.panelDashboard);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "FormDashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormDashboard";
-            ((System.ComponentModel.ISupportInitialize)(this.Client)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Event)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Room)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Order)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Invoice)).EndInit();
+            this.panelDashboard.ResumeLayout(false);
+            this.panelDashboard.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox Client;
-        private System.Windows.Forms.PictureBox Event;
-        private System.Windows.Forms.PictureBox Room;
-        private System.Windows.Forms.PictureBox Order;
-        private System.Windows.Forms.PictureBox Invoice;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panelDashboard;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
     }
 }
 

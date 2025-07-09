@@ -65,8 +65,8 @@ namespace EvoHotel
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            FormDashboard formMenu = new FormDashboard();
-            formMenu.Show();
+            FormEvent formevent = new FormEvent();
+            formevent.Show();
             this.Hide();
         }
         private void ExportReport(string format)

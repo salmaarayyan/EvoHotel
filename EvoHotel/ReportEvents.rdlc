@@ -42,7 +42,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.99585cm</Width>
+              <Width>3.61762cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>4.27908cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.99585cm</Width>
@@ -54,16 +57,13 @@
               <Width>2.99585cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.99585cm</Width>
+              <Width>3.51179cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.99585cm</Width>
+              <Width>2.6122cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.99585cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.99585cm</Width>
+              <Width>3.27366cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -603,7 +603,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.99585cm</Size>
+                    <Size>1.76554cm</Size>
                     <CellContents>
                       <Textbox Name="AcaraID">
                         <CanGrow>true</CanGrow>
@@ -641,8 +641,8 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>2.47509cm</Top>
         <Left>1.06398cm</Left>
-        <Height>3.21083cm</Height>
-        <Width>26.96264cm</Width>
+        <Height>3.21084cm</Height>
+        <Width>28.04744cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -653,7 +653,7 @@
     <Height>2.61111in</Height>
     <Style />
   </Body>
-  <Width>13.0026in</Width>
+  <Width>11.76327in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
