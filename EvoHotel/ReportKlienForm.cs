@@ -9,7 +9,9 @@ namespace EvoHotel
     public partial class ReportKlienForm : Form
     {
         // Connection string to your database
-        private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
+        //private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
 
         public ReportKlienForm()
         {
@@ -32,7 +34,7 @@ namespace EvoHotel
 
                 DataTable dt = new DataTable();
 
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(kn.connectionString()))
                 {
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
                     da.Fill(dt);

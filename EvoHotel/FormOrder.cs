@@ -14,7 +14,9 @@ namespace EvoHotel
 {
     public partial class FormOrder : Form
     {
-        private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
+        //private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
         public FormOrder()
         {
             InitializeComponent();
@@ -47,7 +49,7 @@ namespace EvoHotel
 
         private void LoadData()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -231,7 +233,7 @@ namespace EvoHotel
             }
 
             // Gunakan transaksi untuk memastikan integritas data
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 SqlTransaction transaction = null;
                 try
@@ -385,7 +387,7 @@ namespace EvoHotel
                     return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 SqlTransaction transaction = null;
                 try
@@ -480,7 +482,7 @@ namespace EvoHotel
             int acaraId = (int)comboBoxAcara.SelectedValue;
             int klienId = (int)comboBoxKlien.SelectedValue;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 SqlTransaction transaction = null;
                 try
@@ -615,7 +617,7 @@ namespace EvoHotel
         private void LoadKlienComboBox()
         {
             comboBoxKlien.Items.Clear();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -660,7 +662,7 @@ namespace EvoHotel
         {
             comboBoxAcara.DataSource = null;
             comboBoxAcara.Items.Clear();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -692,7 +694,7 @@ namespace EvoHotel
         {
             if (comboBoxAcara.SelectedValue == null) return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 string query = @"
@@ -763,7 +765,7 @@ namespace EvoHotel
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {

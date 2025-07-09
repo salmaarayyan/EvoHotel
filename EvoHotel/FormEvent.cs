@@ -13,7 +13,9 @@ namespace EvoHotel
 {
     public partial class FormEvent : Form
     {
-        private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
+        //private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
         private int selectedAcaraID = -1;
         public FormEvent()
         {
@@ -46,7 +48,7 @@ namespace EvoHotel
 
         private void LoadData()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -155,7 +157,7 @@ namespace EvoHotel
 
                 if (confirm == DialogResult.Yes)
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    using (SqlConnection conn = new SqlConnection(kn.connectionString()))
                     {
                         try
                         {
@@ -193,7 +195,7 @@ namespace EvoHotel
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 SqlTransaction transaction = null; // Inisialisasi transaksi
@@ -244,7 +246,7 @@ namespace EvoHotel
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 SqlTransaction transaction = null;
@@ -351,7 +353,7 @@ namespace EvoHotel
             DialogResult result = MessageBox.Show("Yakin ingin menghapus acara ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -387,7 +389,7 @@ namespace EvoHotel
         private void LoadKlienComboBox()
         {
             comboBoxKlien.Items.Clear();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 string query = "SELECT KlienID, NamaKlien FROM Klien";
@@ -405,7 +407,7 @@ namespace EvoHotel
 
         private void LoadRuanganComboBox(int? currentRuanganId = null)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 string query = @"
@@ -444,7 +446,7 @@ namespace EvoHotel
         }
         private void AnalyzeQuery(string sqlquery)
         {
-            using (var conn = new SqlConnection(connectionString))
+            using (var conn = new SqlConnection(kn.connectionString()))
             {
                 conn.InfoMessage += (s, e) => MessageBox.Show(e.Message, "STATISTICS INFO");
                 conn.Open();
@@ -462,7 +464,7 @@ namespace EvoHotel
         }
         private void EnsureIndexes()
         {
-            using (var conn = new SqlConnection(connectionString))
+            using (var conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 var indexScript = @"

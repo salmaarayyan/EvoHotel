@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
+using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -11,6 +12,8 @@ namespace EvoHotel
 {
     public partial class FormReport : Form
     {
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
         public FormReport()
         {
             InitializeComponent();
@@ -33,11 +36,12 @@ namespace EvoHotel
         // Load all clients into the ComboBox
         private void LoadClients()
         {
-            string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+            strKonek = kn.connectionString();
+            //string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
             string query = "SELECT KlienID, NamaKlien FROM Klien";
 
             DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 da.Fill(dt);
@@ -51,8 +55,9 @@ namespace EvoHotel
 
         private void EnsureIndexes()
         {
-            string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
-            using (var conn = new SqlConnection(connectionString))
+            strKonek = kn.connectionString();
+            //string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+            using (var conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 var indexScript = @"
@@ -77,8 +82,9 @@ namespace EvoHotel
 
         private void AnaylzeQuery(string sqlquery)
         {
-            string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
-            using (var conn = new SqlConnection(connectionString))
+            strKonek = kn.connectionString();
+            //string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+            using (var conn = new SqlConnection(kn.connectionString()))
             {
                 conn.InfoMessage += (s, e) => MessageBox.Show(e.Message, "STATISTICS INFO");
                 conn.Open();
@@ -119,7 +125,8 @@ namespace EvoHotel
 
         private void SetupReportViewer()
         {
-            string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+            strKonek = kn.connectionString();
+            //string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
 
             string query = @"SELECT 
         p.PemesananID,
@@ -140,7 +147,7 @@ namespace EvoHotel
     WHERE p.Status = 'Menunggu Konfirmasi'";
 
             DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
 

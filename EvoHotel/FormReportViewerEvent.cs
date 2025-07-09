@@ -8,6 +8,8 @@ namespace EvoHotel
 {
     public partial class FormReportViewerEvent : Form
     {
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
         private int? selectedKlienId;
 
         // Constructor with optional client ID
@@ -25,7 +27,8 @@ namespace EvoHotel
 
         private void SetupReportViewer()
         {
-            string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+            strKonek = kn.connectionString();
+            //string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
             string query = @"SELECT Acara.AcaraID, 
                                     Acara.NamaAcara,
                                     Acara.Deskripsi,
@@ -44,7 +47,7 @@ namespace EvoHotel
                 query += " WHERE Acara.KlienID = @KlienID";
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
                 if (selectedKlienId.HasValue)

@@ -13,7 +13,9 @@ namespace EvoHotel
 {
     public partial class FormClient : Form
     {
-        private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
+        //private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
         private BindingSource bindingSource = new BindingSource();
         public FormClient()
         {
@@ -31,7 +33,7 @@ namespace EvoHotel
 
         private void LoadData()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -78,7 +80,7 @@ namespace EvoHotel
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -154,7 +156,7 @@ namespace EvoHotel
 
             int klienID = Convert.ToInt32(klienIDValue);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -215,7 +217,7 @@ namespace EvoHotel
 
             int klienID = Convert.ToInt32(klienIDValue);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -308,7 +310,7 @@ namespace EvoHotel
 
         private void btnAnalisis_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {

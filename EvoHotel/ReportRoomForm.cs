@@ -9,7 +9,9 @@ namespace EvoHotel
     public partial class ReportRoomForm : Form
     {
         // Connection string to your database
-        private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
+        //private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
 
         public ReportRoomForm()
         {
@@ -40,7 +42,7 @@ JOIN Klien ON Acara.KlienID = Klien.KlienID;";
                 DataTable dt = new DataTable();
 
                 // Use SqlDataAdapter to fill the DataTable with data from the database
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(kn.connectionString()))
                 {
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
                     da.Fill(dt);

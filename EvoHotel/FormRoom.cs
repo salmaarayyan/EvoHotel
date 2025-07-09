@@ -14,7 +14,9 @@ namespace EvoHotel
 {
     public partial class FormRoom : Form
     {
-        private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
+        //private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
         private int selectedRoomID = -1;
 
         public FormRoom()
@@ -35,7 +37,7 @@ namespace EvoHotel
 
         private void LoadData()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -126,7 +128,7 @@ namespace EvoHotel
         {
             if (!ValidInput()) return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -166,7 +168,7 @@ namespace EvoHotel
 
             if (!ValidInput()) return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -207,7 +209,7 @@ namespace EvoHotel
             DialogResult result = MessageBox.Show("Yakin ingin menghapus data ruangan ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No) return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -256,7 +258,7 @@ namespace EvoHotel
 
         private void btnAnalisis_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {

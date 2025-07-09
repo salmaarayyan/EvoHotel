@@ -15,7 +15,9 @@ namespace EvoHotel
 {
     public partial class FormInvoice : Form
     {
-        private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
+        Koneksi kn = new Koneksi();
+        string strKonek = "";
+        //private string connectionString = "Data Source=LAPTOP-SALMAARA\\SALMALUVIRZA;Initial Catalog=ProjekEvoHotel;Integrated Security=True";
         private byte[] buktiPembayaranBytes = null;
         private string buktiPembayaranFileName = "";
         public FormInvoice()
@@ -60,7 +62,7 @@ namespace EvoHotel
 
         private void LoadData()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -167,7 +169,7 @@ namespace EvoHotel
 
             int dataPembayaranID = Convert.ToInt32(dgvDataPembayaran.CurrentRow.Cells["DataPembayaranID"].Value);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -246,7 +248,7 @@ namespace EvoHotel
             // Ambil PembayaranID dari baris yang dipilih
             int DatapembayaranID = Convert.ToInt32(dgvDataPembayaran.CurrentRow.Cells["DataPembayaranID"].Value);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -318,7 +320,7 @@ namespace EvoHotel
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -363,7 +365,7 @@ namespace EvoHotel
             comboBoxPemesanan.DataSource = null;
             comboBoxPemesanan.Items.Clear();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 string query = @"
@@ -388,7 +390,7 @@ namespace EvoHotel
 
         private void LoadDropdowns()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
 
@@ -452,7 +454,7 @@ namespace EvoHotel
         {
             if (comboBoxPemesanan.SelectedValue == null) return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 string query = @"
@@ -502,7 +504,7 @@ namespace EvoHotel
         private void BtnAnalisis_Click(object sender, EventArgs e)
         {
             SetupQueryOptimization();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 try
                 {
@@ -561,7 +563,7 @@ namespace EvoHotel
 
         private void SetupQueryOptimization()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
 
@@ -614,7 +616,7 @@ namespace EvoHotel
 
             int dataPembayaranID = Convert.ToInt32(dgvDataPembayaran.CurrentRow.Cells["DataPembayaranID"].Value);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(kn.connectionString()))
             {
                 conn.Open();
                 string query = "SELECT BuktiPembayaran FROM DataPembayaran WHERE DataPembayaranID = @ID";
